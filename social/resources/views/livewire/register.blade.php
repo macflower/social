@@ -1,9 +1,5 @@
-<?php
-    $currentStep = '1';
-?>
-
 <div>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" novalidate>
         @csrf
 
         <!-- Step 1 -->
@@ -29,51 +25,61 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-jet-button class="ml-4" wire:click="firstStepSubmit">Далее</x-jet-button>
+                <x-jet-button class="ml-4" wire:click="firstStepSubmit" type="button">Далее</x-jet-button>
             </div>
         </div><!-- ./ Step 1 -->
 
-
-        
-        <!--
-        <div class="mt-4">
-            <x-jet-input id="username" class="block mt-1 w-full" type="text" wire:model="username" :value="old('username')" 
-                        placeholder="Логин" required autofocus autocomplete="username" />
-        </div>
-
-        <div class="mt-4">
-            <x-jet-input id="email" class="block mt-1 w-full" type="email" wire:model="email" :value="old('email')" 
-                        placeholder="Email" required />
-        </div>
-
-        <div class="mt-4">
-            <x-jet-input id="password" class="block mt-1 w-full" type="password" wire:model="password" required autocomplete="new-password" 
-                        placeholder="Пароль" />
-        </div>
-
-        <div class="mt-4">
-            <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" wire:model="password_confirmation" 
-                        placeholder="Подтвердить пароль" required autocomplete="new-password" />
-        </div>
-
-        @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+        <!-- Step 2 -->
+        <div class="{{ $currentStep != 2 ? 'hidden' : '' }}" id="step-2">
+            
             <div class="mt-4">
-                <x-jet-label for="terms">
-                    <div class="flex items-center">
-                        <x-jet-checkbox wire:model="terms" id="terms"/>
-
-                        <div class="ml-2">
-                            {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                    'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                    'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
-                            ]) !!}
-                        </div>
-                    </div>
-                </x-jet-label>
+                <x-jet-input id="username" class="block mt-1 w-full" type="text" wire:model="username" :value="old('username')" 
+                            placeholder="Логин" required autofocus autocomplete="username" />
             </div>
-        @endif
 
+            <div class="mt-4">
+                <x-jet-input id="email" class="block mt-1 w-full" type="email" wire:model="email" :value="old('email')" 
+                            placeholder="Email" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-input id="password" class="block mt-1 w-full" type="password" wire:model="password" required autocomplete="new-password" 
+                        placeholder="Пароль" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" wire:model="password_confirmation" 
+                            placeholder="Подтвердить пароль" required autocomplete="new-password" />
+            </div>
+
+            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
+                <div class="mt-4">
+                    <x-jet-label for="terms">
+                        <div class="flex items-center">
+                            <x-jet-checkbox wire:model="terms" id="terms"/>
+
+                            <div class="ml-2">
+                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
+                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
+                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
+                                ]) !!}
+                            </div>
+                        </div>
+                    </x-jet-label>
+                </div>
+            @endif
+
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    {{   ('Already regisrered?') }}
+                </a>
+
+                <x-jet-button class="ml-4" wire:click="submitForm">
+                    {{  ('Register') }}
+                </x-jet-button>
+            </div>
+        </div><!-- ./ Step 2 -->
         
+                
     </form>
-    -->
 </div>
